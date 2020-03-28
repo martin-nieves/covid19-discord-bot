@@ -4,20 +4,23 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node-dev src/index.ts"
+    "start": "ts-node-dev src/index.ts",
+    "build:prod": "rimraf dist && tsc",
+    "start:prod": "node dist/index.js"
   },
   "author": "mnieves",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^13.9.5",
     "axios": "^0.19.2",
     "discord.js": "^12.1.0",
     "dotenv": "^8.2.0",
     "joi": "^14.3.1",
-    "typescript": "^3.8.3"
+    "rimraf": "^3.0.2"
   },
   "devDependencies": {
+    "@types/node": "^13.9.5",
     "@types/joi": "^14.3.4",
-    "ts-node-dev": "^1.0.0-pre.44"
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.8.3"
   }
 }
