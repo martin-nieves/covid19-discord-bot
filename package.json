@@ -1,0 +1,23 @@
+{
+  "name": "covid19-discord-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node-dev src/index.ts"
+  },
+  "author": "mnieves",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^13.9.5",
+    "axios": "^0.19.2",
+    "discord.js": "^12.1.0",
+    "dotenv": "^8.2.0",
+    "joi": "^14.3.1",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "@types/joi": "^14.3.4",
+    "ts-node-dev": "^1.0.0-pre.44"
+  }
+}
