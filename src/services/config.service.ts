@@ -5,31 +5,27 @@ import { EnvConfig } from '../types/env-config.type';
 
 export class ConfigService {
 
-    private readonly envConfig: EnvConfig;
-
     constructor(filePath: string = '.env') {
-        const config = dotenv.parse(fs.readFileSync(filePath));
-        this.envConfig = this.validateInput(config);
-
+        try {
+            const config = dotenv.parse(fs.readFileSync(filePath));
+            this.validateInput(config);
+        } catch (err) {
+            console.log('Cloud variables are being used');
+        }
     }
-    
+
     get botToken(): string {
-        return this.envConfig.BOT_TOKEN;
+        return process.env.BOT_TOKEN;
     }
 
     get botId(): string {
-        return this.envConfig.BOT_ID;
+        return process.env.BOT_ID;
     }
 
-    get port(): number {
-        return +this.envConfig.PORT;
-    }
-
-    private validateInput(envConfig: EnvConfig): EnvConfig {
+    private validateInput(envConfig: EnvConfig) {
         const envVarsSchema: Joi.ObjectSchema = Joi.object({
             BOT_TOKEN: Joi.string().required(),
             BOT_ID: Joi.string().required(),
-            PORT: Joi.number().default(3000),
         });
 
         const { error, value: validatedEnvConfig } = Joi.validate(
@@ -39,7 +35,12 @@ export class ConfigService {
 
         if (error) throw new Error(`Config validation error: ${error.message}`);
 
-        return validatedEnvConfig;
+        this.setVariables(validatedEnvConfig);
+    }
+
+    private setVariables(config: EnvConfig) {
+        process.env['BOT_TOKEN'] = config.BOT_TOKEN;
+        process.env['BOT_ID'] = config.BOT_ID;
     }
 
 }
