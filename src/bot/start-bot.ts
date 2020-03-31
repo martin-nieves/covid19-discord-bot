@@ -23,8 +23,8 @@ export function startBot() {
     if (msg.mentions.members.some(x => isBotId(x.id))) {
       msg.reply(
         random([
-          'psst, wanna see some magic? Try typing `-covid UY`',
-          'I can show you the latest covid info per country, try this: `-covid IT`',
+          'psst, wanna see some magic? Try typing `-covid uruguay`',
+          'I can show you the latest covid info per country, try this: `-covid italy`',
           'I got some bat soup, want to share?'
         ])
       );
